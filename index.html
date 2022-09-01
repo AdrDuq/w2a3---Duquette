@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>React Import External JSON</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://unpkg.com/react/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <h1>ayo</h1>
+  <h2>this is a page</h2>
+  <div id="myApp">
+    
+  </div>
+  <script type="text/babel">
+    "use strict";
+
+    function JsonList(props) {
+    console.log(props);
+      return <div>
+              <table>
+                  <th> Authors: </th>
+                {
+                  props.list.map(
+                    (item,index) => (
+                      <td key={index}>
+                        <a href={item.wiki}>
+                          {item.name}                
+                        </a>
+                      </td>
+                    )
+                  )
+                }
+              </table>
+            </div>;
+    }
+
+    $.getJSON('JSON', 
+      function(jsonFromJquery) {
+        const myRoot = ReactDOM.createRoot(document.getElementById('myApp'));
+        myRoot.render(<JsonList list={jsonFromJquery} /> );
+      }
+    );
+  </script>
+</body>
+</html>
